@@ -7,9 +7,9 @@ html, body {
     padding: 0;
 }
 header {
+    position: fixed;
     margin: 0;
     padding: 0;
-    position: fixed;
     width: 100vw;
     height: 80px;
     background-color:blue;
