@@ -6,6 +6,10 @@ html, body {
     margin: 0;
     padding: 0;
 }
+body {
+    display: flex;
+    flex-direction: column;
+}
 header {
     position: fixed;
     width: 100vw;
@@ -52,17 +56,12 @@ header {
     font-size: 2vw;
     text-decoration: none;
 }
-main {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-}
 .front-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
-.background-img {
+/*.background-img {
     position: absolute;
     top: 0;
     left: 0;
@@ -81,4 +80,4 @@ main {
     text-decoration: none;
     font-family: 'Courier New', Courier, monospace;
     color: white;
-}
+} */
