@@ -6,6 +6,10 @@ html, body {
     margin: 0;
     padding: 0;
 }
+body {
+    display: flex;
+    flex-direction: column;
+}
 #header {
     position: fixed;
     width: 100vw;
@@ -36,10 +40,21 @@ html, body {
     align-items: center;
 }
 .nav-option {
-    text-align: center;
+    position: relative;
     text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-bar-text {
+    text-align: center;
     color: white;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vw;
+    text-decoration: none;
 }
 .front-page {
     margin-top: 60px;
