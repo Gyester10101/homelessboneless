@@ -56,8 +56,10 @@ body {
     font-size: 2vw;
     text-decoration: none;
 }
-.front-page {
+main {
     margin-top: 60px;
+}
+.front-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
