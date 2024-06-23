@@ -12,10 +12,10 @@ body {
 }
 header {
     position: fixed;
-    top: 80px;
     width: 100vw;
     height: 80px;
     background-color:blue;
+    border: 5px solid red;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -56,12 +56,12 @@ header {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2vw;
     text-decoration: none;
-}
+} /*
 .front-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
-}
+} */
 /*.background-img {
     position: absolute;
     top: 0;
