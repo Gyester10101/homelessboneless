@@ -12,6 +12,7 @@ body {
 }
 header {
     position: fixed;
+    top: 80px;
     width: 100vw;
     height: 80px;
     background-color:blue;
