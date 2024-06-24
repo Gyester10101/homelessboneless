@@ -1,6 +1,7 @@
 :root {
     --blue: #284b63;
     --teal: #3c6e71;
+    --black: #353535;
     --text-color: #d9d9d9;
 }
 html {
@@ -47,7 +48,7 @@ header {
 }
 .nav-bar-text {
     text-align: center;
-    font-size: 1.3vw;
+    font-size: 1.4vw;
 } 
 .nav-option {
     color: var(--text-color);
@@ -56,29 +57,36 @@ header {
     font-weight: bold;
 }
 .nav-option:hover {
-    color: black;
+    color: var(--black);
 }
 main {
     margin-top: 110px;
 }
 .front-page {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    background-color: var(--text-color);
 }
 .image-container {
     width: 100%;
     height: 70vh;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.transparent-background {
+.transparent {
+    background-color: rgba(0,0,0,0.5);
+}
+.fill {
     position: absolute;
-    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+}
+.discription-container {
+    position: absolute;
     width: 60%;
     height: 50%;
     display: flex;
@@ -98,7 +106,7 @@ main {
 }
 #anchor-boxes-container {
     position: relative;
-    top: -15%;
+    top: -10%;
     margin: 0 auto;
     width: 75vw;
     height: 40vw;
@@ -132,5 +140,5 @@ main {
 footer {
     width: 100%;
     height: 100px;
-    background-color: var(--teal);
+    background-color: var(--blue);
 }
