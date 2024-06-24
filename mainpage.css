@@ -123,6 +123,7 @@ main {
 }
 .anchor-box:hover {
     background-color: var(--teal);
+    transform: scale(1.05);
 }
 .anchor-box-text {
     text-align: center;
