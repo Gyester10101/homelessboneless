@@ -95,9 +95,6 @@ main {
 .front-page {
     width: 100%;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     background-color: var(--text-color);
 }
 .one-page {
@@ -110,7 +107,7 @@ main {
 }
 .image-container {
     width: 100%;
-    height: 70vh;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -131,18 +128,18 @@ main {
     color: white;
 }
 #anchor-boxes-container {
-    position: relative;
-    margin: 0 auto;
-    top: -10%;
-    width: 1100px;
-    height: 400px;
+    display: grid;
+    margin: -50px auto 0;
+    max-width: 1100px;
+    width: 100%;
+    height: auto;
     gap: 3%;
+    grid-template-columns: repeat(4, 1fr);
 }
 .anchor-box {
-    display: block;
     text-decoration: none;
-    height: 70%;
     border-radius: 5px;
+    height: 200px;
     background-color: var(--blue);
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -219,7 +216,7 @@ main {
 }
 footer {
     width: 100%;
-    height: 100px;
+    height: 150px;
     background-color: var(--blue);
 }
 @media (max-width: 1260px) {
@@ -235,48 +232,62 @@ footer {
         width: 600px; 
         height: 400px;
     }
-    #anchor-boxes-container {
-        top: -15%;
-        width: 775px;
-    }
-    .anchor-box {
-        height: 60%;
-    }
-    .anchor-box-text {
-        font-size: 1.6rem;
-    }
     #convict-description {
         font-size: 3rem;
     }
-}
-@media (max-width: 798px) {
-    .discription-container {
-        width: 450px;
-        height: 350px;
-    }
     #anchor-boxes-container {
-        width: 450px;
-        height: 900px;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        width: 820px;
     }
     .anchor-box {
-        height: 175px;
-    }
-    #convict-description {
-        font-size: 2.5rem;
+        height: 200px;
     }
 }
-@media (max-width: 700px) {
+@media (max-width: 840px) {
     #header-text {
         font-size: 3.1rem;
     }
     .nav-bar-text2 {
         font-size: 1.2rem;
     }
+    .discription-container {
+        width: 450px;
+        height: 350px;
+    }
+    #convict-description {
+        font-size: 2.5rem;
+    }
+    #anchor-boxes-container {
+        margin-top: 25px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        width: 450px;
+    }
+    .anchor-box {
+        height: 150px;
+    }
+    .anchor-box-text {
+        font-size: 1.7rem;
+    }
+    .image-container {
+        height: 60%;
+    }
 }
 @media (max-width: 550px) {
     .nav-bar-text2 {
         font-size: 1.0rem;
+    }
+    .discription-container {
+        width: 400px; 
+        height: 375px;
+    }
+    #anchor-boxes-container {
+        margin-top: 55px;
+        width: 425px;
+    }
+    .anchor-box {
+        height: 125px;
+    }
+    .anchor-box-text {
+        font-size: 1.4rem;
     }
 }
