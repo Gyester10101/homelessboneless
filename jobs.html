@@ -17,10 +17,16 @@
             </nav>
           </header>
           <main>
+            <!-- next section is fully visible on 100vh-->
             <section class="one-page">
-                <div class="background-container">
-                    <img class="background-img top-left" src="./real.jpg"/>
-                    <div class="background-img transparent top-left"></div>
+                <div name="background-container" class="background" style="position: relative">
+                    <img class="background" src="./real.jpg"/>
+                    <div id="transparent-background"class="transparent background top-left center-inside-object">
+                        <div id="first-quiz" class="quiz-container">
+                            <h2 id="unsure-text">Not sure where to start?</h2>
+                            <button id="take-quiz">Take Quiz</button>
+                        </div>
+                    </div>
                 </div>
             </section>
           </main>
@@ -28,4 +34,5 @@
 
           </footer>
     </body>
+    <script src="script.js"></script>
 </html>
