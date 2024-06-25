@@ -226,6 +226,9 @@ footer {
     #nav2-button {
         display: inline;
     }
+    header {
+        justify-content: center;
+    }
 }
 @media (max-width: 1115px) {
     .discription-container {
@@ -244,7 +247,10 @@ footer {
 }
 @media (max-width: 840px) {
     #header-text {
-        font-size: 3.1rem;
+        font-size: 3.0rem;
+    }
+    #header-text:hover {
+        font-size: 3.2rem;
     }
     .nav-bar-text2 {
         font-size: 1.2rem;
@@ -273,9 +279,6 @@ footer {
     }
 }
 @media (max-width: 550px) {
-    .nav-bar-text2 {
-        font-size: 1.0rem;
-    }
     .discription-container {
         width: 400px; 
         height: 375px;
