@@ -219,7 +219,7 @@ footer {
     height: 150px;
     background-color: var(--blue);
 }
-@media (max-width: 1260px) {
+@media (max-width: 1270px) {
     #nav-bar {
         display: none;
     }
