@@ -288,6 +288,7 @@ footer {
         width: 425px;
     }
     .anchor-box {
+        max-width: 200px;
         height: 125px;
     }
     .anchor-box-text {
