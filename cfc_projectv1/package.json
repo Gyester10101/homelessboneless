@@ -1,0 +1,26 @@
+{
+  "name": "cfc_project",
+  "version": "1.0.0",
+  "description": " Back-end for website",
+  "main": "index.js",
+  "scripts": {
+    "start": "node apicaller.js",
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gyester10101/homelessboneless.git"
+  },
+  "author": "Tom Ato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gyester10101/homelessboneless/issues"
+  },
+  "homepage": "https://github.com/Gyester10101/homelessboneless#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "java": "^0.14.0",
+    "java-bridge": "^2.6.0"
+  }
+}
