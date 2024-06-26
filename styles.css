@@ -65,8 +65,10 @@ header {
 }
 #nav-bar2 {
     display: none;
+    position: fixed;
+    top: 113px;
     width: 100%;
-    height: 100%;
+    height: 100px;
     background-color: var(--teal);
     border-bottom: 3px solid black;
 }
@@ -77,6 +79,7 @@ header {
 #nav2-button {
     display: none;
     position: absolute;
+    top: 113px;
     right: 17px;
     width: 50px;
     height: 45px;
@@ -156,9 +159,16 @@ main {
     text-align: center;
     font-size: 2rem;
 }
-.quiz-container {
+.quiz-submit-container {
     width: 50%;
-    height: 70%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.quiz-container {
+    width: 100%;
+    height: 85%;
     background-color: var(--text-color);
     border-radius: 5px;
     border: 3px solid black;
@@ -174,20 +184,99 @@ main {
     font-weight: normal;
     text-align: center;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 5vw;
+    font-size: 5rem;
     margin-top: 0;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 #take-quiz {
-    width: 30%;
+    min-width: 50%;
+    min-height: 20%;
     color: orange;
     border-color: orange;
-    font-size: 3.5vw;
+    font-size: 4rem;
 }
 #take-quiz:hover {
     background-color: rgba(250, 186, 68, 0.8);
     transform: scale(1.05);
     cursor: pointer;
+}
+.quiz-number {
+    width: 110px;
+    font-size: 4rem;
+    margin-left: 5%;
+}
+.question {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: normal;
+}
+.answers-container {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.answer-label {
+    font-size: 3rem;
+}
+.answer {
+    position: relative;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+.question-buttons {
+    display: flex;
+    justify-content: right;
+    height: 100px;
+}
+.quiz-button {
+    width: 40%;
+    height: 100%;
+    border: 3px solid black;
+    font-size: 2.5rem;
+}.quiz-button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+#location-container {
+    outline: 1px solid red;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.location-label {
+    font-size: 3rem;
+    margin-left: 10px;
+}
+#state {
+    width: 320px;
+}
+#city {
+    width: 250px;
+}
+#address {
+    width: 400px;
+}
+#zipcode {
+    width: 90px;
+}
+#distance {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#distance-num {
+    margin-left: 10px;
+}
+.location-input {
+    height: 40px;
+    width: 70%;
+    position: relative;
+    vertical-align: middle;
+    font-size: 2rem;
 }
 .background {
     width: 100%;
@@ -244,6 +333,9 @@ footer {
     .anchor-box {
         height: 200px;
     }
+    .quiz-container {
+        width: 550px;
+    }
 }
 @media (max-width: 840px) {
     #header-text {
@@ -276,6 +368,29 @@ footer {
     }
     .image-container {
         height: 60%;
+    }
+    .quiz-container {
+        width: 370px;
+        height: 60%;
+    }
+    #unsure-text {
+        font-size: 4rem;
+    }
+    #take-quiz {
+        font-size: 3rem;
+    }
+    .quiz-number {
+        font-size: 3rem;
+    }
+    .question {
+        font-size: 2rem;
+    }
+    .answer-label {
+        font-size: 2rem;
+    }
+    .answer {
+        width: 30px;
+        height: 30px;
     }
 }
 @media (max-width: 550px) {
