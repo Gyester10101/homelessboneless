@@ -164,7 +164,6 @@ main {
     height: 80%;
     display: flex;
     flex-direction: column;
-    
 }
 .quiz-container {
     width: 100%;
@@ -217,7 +216,9 @@ main {
     justify-content: space-evenly;
 }
 .answer-label {
-    font-size: 3rem;
+    font-size: 2rem;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .answer {
     position: relative;
@@ -239,8 +240,26 @@ main {
     transform: scale(1.05);
     cursor: pointer;
 }
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+#address-header {
+    width: 100%;
+    background-color: var(--blue);
+    height: 77px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#address-title {
+    margin-left: 10px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    font-size: 3rem;
+}
 #location-container {
-    outline: 1px solid red;
     width: 100%;
     height: 70%;
     display: flex;
@@ -269,7 +288,7 @@ main {
     margin-right: auto;
 }
 #distance-num {
-    margin-left: 10px;
+    margin-left: 10p
 }
 .location-input {
     height: 40px;
@@ -305,7 +324,8 @@ main {
 }
 footer {
     width: 100%;
-    height: 150px;
+    border-top: 3px solid black;
+    height: 147px;
     background-color: var(--blue);
 }
 @media (max-width: 1270px) {
@@ -333,7 +353,7 @@ footer {
     .anchor-box {
         height: 200px;
     }
-    .quiz-container {
+    .quiz-submit-container {
         width: 550px;
     }
 }
@@ -345,7 +365,7 @@ footer {
         font-size: 3.2rem;
     }
     .nav-bar-text2 {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
     }
     .discription-container {
         width: 450px;
@@ -369,8 +389,8 @@ footer {
     .image-container {
         height: 60%;
     }
-    .quiz-container {
-        width: 370px;
+    .quiz-submit-container {
+        width: 360px;
         height: 60%;
     }
     #unsure-text {
@@ -386,25 +406,59 @@ footer {
         font-size: 2rem;
     }
     .answer-label {
-        font-size: 2rem;
+        font-size: 1.2rem;
     }
     .answer {
         width: 30px;
         height: 30px;
     }
+    .question-buttons {
+        height: 60px;
+    }
+    #address-header {
+        height: 47px;
+    }
+    #address-title {
+        font-size: 2rem;
+    }
+    .location-label {
+        font-size: 2rem;
+    }
+    .location-input {
+        height: 20px;
+        font-size: 1rem;
+    }
+    #state {
+        width: 170px;
+    }
+    #city {
+        width: 120px
+    }
+    #address {
+        width: 200px;
+    }
+    #zipcode {
+        width: 45px;
+    }
 }
 @media (max-width: 550px) {
+    #header-text {
+        font-size: 2.3rem;
+    }
+    #header-text:hover {
+        font-size: 2.4rem;
+    }
     .discription-container {
-        width: 400px; 
+        width: 350px; 
         height: 375px;
     }
     #anchor-boxes-container {
         margin-top: 55px;
-        width: 425px;
+        width: 350px;
     }
     .anchor-box {
-        max-width: 200px;
-        height: 125px;
+        max-width: 175px;
+        height: 100px;
     }
     .anchor-box-text {
         font-size: 1.4rem;
