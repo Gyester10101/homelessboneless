@@ -51,7 +51,7 @@ const quizQuestions = [
     },
     {
         question: "What is your education level?",
-        options: ["Associate's/Higher", "High School Diploma/GED", "No High School Diploma/GED"]
+        options: ["Associate's or Higher", "High School Diploma/GED", "No High School Diploma/GED"]
     },
     {
         question: "What skills do you have?",
@@ -74,7 +74,10 @@ const quizQuestions = [
         options: ["Independent", "Collaboratively"]
     }
 ];
+
+//
 const quizAnswers = [];
+//
 function startQuiz() {
     quizSubmitContainer.innerHTML = `
     <div class="quiz-container"> 
@@ -87,35 +90,28 @@ function startQuiz() {
     <div class="question-buttons">
     ${createBackButton()}
     ${createNextButton()}
-    ${createSubmitButton()}
     </div>
     `
     setupQuizFunctions();
 }
 function setupQuizFunctions() {
-    if (quizNumber < quizQuestions.length) {
-        const nextButton = document.getElementById('next');
-        nextButton.addEventListener("click", goNext);
-    }
+    const nextButton = document.getElementById('next');
+    nextButton.addEventListener("click", goNext);
+
     if (quizNumber >= 2) {
         const backButton = document.getElementById('back');
         backButton.addEventListener("click", goBack);
     }
-    if (quizNumber === quizQuestions.length) {
-        const submitButton = document.getElementById('submit');
-        submitButton.addEventListener("click", submitQuizData);
-    }
-}
-function submitQuizData() {
-    console.log(quizAnswers);
-    createlocationMenu();
 }
 function goNext() {
     if (document.querySelector('input[name="answers"]:checked') !== null) {
     storeRadioData();
     quizNumber++;
-    startQuiz();
-    }
+    if (quizNumber > quizQuestions.length) {
+        console.log(quizAnswers);
+        createlocationMenu();
+    } else startQuiz();
+    } else alert('missing an answer')
 }
 function storeRadioData() {
     console.log(document.querySelector('input[name="answers"]:checked').value);
@@ -135,9 +131,7 @@ function createBackButton() {
     } else return "";
 }
 function createNextButton() {
-    if (quizNumber < quizQuestions.length) {
-        return `<button id="next" class="quiz-button" type="button">Next</button>`;
-    } else return "";
+    return `<button id="next" class="quiz-button" type="button">Next</button>`;
 }
 function createSubmitButton() {
     if (quizNumber === quizQuestions.length) {
@@ -155,7 +149,10 @@ function outputAnswers() {
 function createlocationMenu() {
     quizSubmitContainer.innerHTML = "";
     quizSubmitContainer.innerHTML += `
-    <div class="quiz-container">
+    <div class="quiz-container flex-column">
+        <div id="address-header">
+            <h2 id="address-title">Address?</h2>
+        </div>
         <form id="location-container">
             <label class="location-label" for="state">State: 
             <select id="state" class="location-input">
@@ -212,16 +209,17 @@ function createlocationMenu() {
 	        <option value="WY">Wyoming</option>
         </select>
         </label>
-        <label class="location-label" for="city"> City: <input class="location-input" id="city" type="text" autocomplete="on"/></label>
-        <label class="location-label" for="address"> Address: <input class="location-input" id="address"  type="text" autocomplete="on"/></label>
-        <label class="location-label" for="zipcode"> Zip: <input class="location-input" id="zipcode"  type="text" autocomplete="on"/></label>
-        <div id="distance-container">
-        <label class="location-label" for="distance"> Max Distance (miles): <input class="location-input" id="distance" type="range" min="1" max="10" 
+        <label class="location-label" for="city"> City: <input class="location-input" id="city" type="text" autocomplete="on" required/></label>
+        <label class="location-label" for="address"> Address: <input class="location-input" id="address"  type="text" autocomplete="on" required/></label>
+        <label class="location-label" for="zipcode"> Zip: <input class="location-input" id="zipcode"  type="text" autocomplete="on" required/></label>
+        <label class="location-label" for="distance"> 
+        Max Distance (<span id="distance-value">5.5</span> miles): 
+        <input class="location-input" id="distance" type="range" min="1" max="10" 
         step="0.1"/></label>
-        <p id="distance-num"></p>
-        </div>
         </form>
-        <button id="location-button">Submit</button>
+    </div>
+    <div class="question-buttons">
+        <button class="quiz-button" id="location-button">Submit</button>
     </div>
     `;
     //sets up those variables AFTER THIS LOCATION MENU RUNS
@@ -232,22 +230,26 @@ function setupLocationFunctions() {
     const distance = document.getElementById('distance');
     locationButton.addEventListener('click', findCoords);
     distance.addEventListener("input", () => {
-        document.getElementById('distance-num').textContent = `${distance.value} miles` ;
+        document.getElementById('distance-value').textContent = distance.value ;
     });
 }
 function findCoords() {
-    getFullAddress();
-    document.getElementById('coords').innerText = addressToCoords();
+    // if any of the elements are empty, then it shouldn't look for the coords
+    if (!document.getElementById('city').value || !document.getElementById('address').value || !document.getElementById('zipcode').value ) {
+        alert("Please fill out all information.")
+    } else {
+    // THESE ARE COORDS OF WHATEVER ADDRESS THEY TYPE. WHAT IS THE NEXT STEP ?!?!?!?
+    addressToCoords(getFullAddress());
+    }
 }
 function getFullAddress() {
     const stateVal = document.getElementById('state').value || '';
     const cityVal = document.getElementById('city').value || '';
     const addrVal = document.getElementById('address').value || '';
     const zipVal = document.getElementById('zipcode').value || '';
-    address = "";
-    address += `${addrVal}, ${cityVal}, ${stateVal}, ${zipVal}`
+    return `${addrVal}, ${cityVal}, ${stateVal}, ${zipVal}`
 }
-async function addressToCoords() {
+async function addressToCoords(address) {
     const apiKey = '6ee983379d584d39b26638affc74f3b3';
     const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${apiKey}`;
 
@@ -262,7 +264,7 @@ async function addressToCoords() {
         if (data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry;
             console.log(`${lat}, ${lng}`)
-            return { lat, lng };
+            return { lat, lng }; 
         } else {
             throw new Error('No results found');
         }
@@ -271,3 +273,15 @@ async function addressToCoords() {
         return null;
     }
 }   
+(async () => {
+    const api = await fetch('https://www.overpass-api.de/api/interpreter?', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:"[out:json];node(48.865,2.25,48.9,2.27)[amenity=restaurant];out;"
+    });
+    const answer = await api.json();
+    console.log(answer);
+  })()
