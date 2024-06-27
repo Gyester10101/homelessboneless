@@ -10,7 +10,7 @@ function setParameters(mil_, lon_, lat_) {
     run();
 }
 
-function run() {
+async function run() {
     fs.readFile('companynamelist.txt', 'utf-8', (err, data) => {
     if (err) { console.error(err); return; }
 
@@ -20,7 +20,9 @@ function run() {
     nameArray.forEach(brand => {
         apicmd += `nwr["brand"="${brand}"](around:${m},${lon},${lat});\n`;
     }); apicmd += `);out geom;`;
-    // locate(apicmd);
+    console.error(apicmd);
+    console.error(encodeURIComponent(apicmd))
+    locate(apicmd);
 })};
 
 var nameList = (data) => {
@@ -34,16 +36,10 @@ async function locate(cmd) {
             method: "POST",
             body: `data=${encodeURIComponent(cmd)}`
         }
-    );
-
-    if (!mapData) {
-        console.log("didn't work");
-        return "dayum";
-    }
-
-    var locationJSON = mapData.json();
+    ).then((data) => data.json());
 
     console.log("Finished grabbing JSON data");
-    console.log(mapData);
-    console.log(JSON.stringify(locationJSON,null,2));
-    return "yipee";
+    console.log(JSON.stringify(mapData,null,2));
+
+    // calls "getLocationsData" method
+}
