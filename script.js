@@ -56,8 +56,7 @@ checkWindowSize();
 const quizSubmitContainer = document.querySelector('.quiz-submit-container')
 let quizNumber = 1;
 const startQuizButton = document.getElementById('take-quiz')
-startQuizButton.addEventListener("click", startQuiz());
-//startQuizButton.addEventListener("click", startQuiz); 
+startQuizButton.addEventListener("click", startQuiz);
 const scores = [
     {
         name: "legalSeverity",
