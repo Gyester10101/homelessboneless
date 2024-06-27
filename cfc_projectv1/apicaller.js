@@ -3,7 +3,7 @@ const query = require('query-overpass');
 const { sourceMapsEnabled } = require('process');
 var mil, lon, lat;
 
-setParameters(2, 37.362760, -122.023660);
+// setParameters(2, 37.362760, -122.023660);
 
 function setParameters(mil_, lon_, lat_) {
     mil=mil_; lon=lon_; lat=lat_;
