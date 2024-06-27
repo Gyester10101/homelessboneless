@@ -1,51 +1,49 @@
-// // var dist, long, lat;
-
-// // var exec = require('child_process').exec, child;
-// // child = exec('hobonohomo.jar',
-// //   function (error, stdout, stderr){
-// //     console.log('stdout: ' + stdout);
-// //     console.log('stderr: ' + stderr);
-// //     if(error !== null){
-// //       console.log('exec error: ' + error);
-// //     }
-// // });
-
-// var java = require("java");
-// var jarfile = "hobonohomo.jar";
-// java.classpath.push(jarPath);
-// java.import('Main.class');
 const fs = require('fs');
+const query = require('query-overpass');
+const { sourceMapsEnabled } = require('process');
 var mil, lon, lat;
+
+setParameters(2, 37.362760, -122.023660);
 
 function setParameters(mil_, lon_, lat_) {
     mil=mil_; lon=lon_; lat=lat_;
+    run();
 }
 
-var apicmd = fs.readFile('companynamelist.txt', 'utf-8', (err, data) => {
+function run() {
+    fs.readFile('companynamelist.txt', 'utf-8', (err, data) => {
     if (err) { console.error(err); return; }
-    
-    let fintxt = "[out:json][timeout:100];(\n";
-    console.log(fintxt);
+
+    let apicmd = "[out:json][timeout:100];(\n";
     var nameArray = nameList(data);
     var m = mil * 1609;
     nameArray.forEach(brand => {
-        fintxt += `nwr["brand"="${brand}"](around:${m},${lon},${lat});\n`;
-    }); fintxt += `);out geom;`; return fintxt;
-});
+        apicmd += `nwr["brand"="${brand}"](around:${m},${lon},${lat});\n`;
+    }); apicmd += `);out geom;`;
+    // locate(apicmd);
+})};
 
 var nameList = (data) => {
     return data.split("\r\n");
 };
 
+async function locate(cmd) {
+    var mapData = await fetch(
+        "https://overpass-api.de/api/interpreter",
+        {
+            method: "POST",
+            body: `data=${encodeURIComponent(cmd)}`
+        }
+    );
 
+    if (!mapData) {
+        console.log("didn't work");
+        return "dayum";
+    }
 
-setParameters(400, 0, 0);
-console.log(apicmd);
+    var locationJSON = mapData.json();
 
-
-
-
-
-
-
-
+    console.log("Finished grabbing JSON data");
+    console.log(mapData);
+    console.log(JSON.stringify(locationJSON,null,2));
+    return "yipee";
