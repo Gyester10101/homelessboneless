@@ -1,16 +1,23 @@
 const navButton2 = document.getElementById('nav2-button');
 const navBar2 = document.getElementById('nav-bar2');
 const navBar2String = navBar2.innerHTML;
+let nav2Open = false;
 
 function toggleNav() {
     if (navBar2.style.display === 'grid') {
         navBar2.style.display = 'none';
         navButton2.style.backgroundImage = 'url(./menu-arrow-down.png)';
-        navButton2.style.top = "113px";
+        if (window.innerWidth <= 840) {
+            navButton2.style.top = "73px";
+        } else navButton2.style.top = "113px";
+        nav2Open = false;
     } else {
         navBar2.style.display = 'grid';
         navButton2.style.backgroundImage = 'url(./menu-arrow-up.png)';
-        navButton2.style.top = "216px";
+        if (window.innerWidth <= 840) {
+            navButton2.style.top = "136px";
+        } else navButton2.style.top = "216px";
+        nav2Open = true;
     }
 }
 
@@ -19,6 +26,16 @@ function checkWindowSize() {
         navBar2.style.display = 'none';
         navButton2.style.backgroundImage = 'url(./menu-arrow-down.png)';
         navButton2.style.top = "113px";
+        nav2Open = false;
+    }
+    if (window.innerWidth <= 840) {
+        if (nav2Open) {
+            navButton2.style.top ="136px"
+        } else navButton2.style.top = "73px";
+    } else {
+        if (nav2Open) {
+            navButton2.style.top ="216px"
+        } else navButton2.style.top = "113px"
     }
     if (window.innerWidth <= 550) {
         navBar2.innerHTML = ""
@@ -39,56 +56,179 @@ checkWindowSize();
 const quizSubmitContainer = document.querySelector('.quiz-submit-container')
 let quizNumber = 1;
 const startQuizButton = document.getElementById('take-quiz')
-startQuizButton.addEventListener("click", startQuiz); 
+startQuizButton.addEventListener("click", startQuiz());
+//startQuizButton.addEventListener("click", startQuiz); 
+const scores = [
+    {
+        name: "legalSeverity",
+        points: 0
+    },
+    {
+        name: "customerService",
+        points: 0
+    },
+    {
+        name: "constructionTrades",
+        points: 0
+    },
+    {
+        name: "healthcare",
+        points: 0
+    },
+    {
+        name: "retail",
+        points: 0
+    },
+    {
+        name: "manufacturing",
+        points: 0
+    },
+    {
+        name: "transportationDelivery",
+        points: 0
+    },
+    {
+        name: "technology",
+        points: 0
+    },
+    {
+        name: "flexibleNeeds",
+        points: 0
+    },
+    {
+        name: "indoorPref",
+        points: 0
+    },
+    {
+        name: "expertise",
+        points: 0
+    },
+    {
+        name: "education",
+        points: 0
+    },
+    {
+        name: "independence",
+        points: 0
+    },
+    {
+        name: "manualLabor",
+        points: 0
+    },
+    {
+        name: "food",
+        points: 0
+    },
+    {
+        name: "largeCompany",
+        points: 0
+    }
+]
 const quizQuestions = [
     {
-        question: "How severe is your criminal record?",
-        options: ["Severe","Weak"]
+        question: "Do you have any current restrictions due to parole or probation?",
+        options: ["Yes","No"],
+        // numbers for easy access to types index
+        indexes: [[0], [0]],
+        effect: [[500], [0]]
     },
     {
-        question: "Do you have any restrictions by parole or probation?",
-        options: ["Yes", "No"]
+        question: "Do you have any pending charges or legal matters?",
+        options: ["Yes", "No"],
+        indexes: [[0],[0]],
+        effect: [[500],[0]]
     },
     {
-        question: "What is your education level?",
-        options: ["Associate's or Higher", "High School Diploma/GED", "No High School Diploma/GED"]
+        question: "Out of these services, which are you most interested in?",
+        options: ["Customer service", "Construction and trades", "Healthcare", "Retail","Manufacturing","Transportation and delivery","Technology"],
+        indexes: [[1,4], [2], [3], [4,1], [5,13], [6], [7,12]],
+        effect: [[100,40],[100],[100],[100,40],[100,40],[100],[100,30]]
     },
     {
-        question: "What skills do you have?",
-        options: ["TechnicaL Skills (IT, Machinery)", "Sales & Customer Service", "Neither"]
+        question: "Are you interested in part-time or full-time work?",
+        options: ["Part-time","Full-time","Either"],
+        indexes: [[8], [8], [8]],
+        effect: [[100],[0],[50]]
     },
     {
-        question: "What is your commitment level?",
-        options: ["Full-Time", "Part-Time"]
+        question: "Do you prefer to work indoors or outdoors?",
+        options: ["Indoors", "Outdoors", "No Preference"],
+        indexes: [[9], [9], [9]],
+        effect:[[100],[0],[50]]
     },
     {
-        question: "High or low manual labor?",
-        options: ["High", "Low"]
+        question: "What are your primary skills or areas of expertise?",
+        options: ["Customer service","Manual labor","Administrative tasks","Technical skills (e.g., IT, machinery)",
+            "Cooking and food service", "Sales"],
+        indexes:[[1,4],[13,5],[7,1],[7,5],[14],[1,4,2]],
+        effect:[[50,20],[50,20],[25,40],[50,10],[50],[40,25,30]]
     },
     {
-        question: "Would you like to work indoor or outdoors",
-        options: ["Indoors", "Outdoors"]
+        question: "Do you have any vocational training or certifications",
+        options: ["Yes","No"],
+        indexes: [[10],[10]],
+        effect:[[0],[70]]
     },
     {
-        question: "Do you prefer to work independently or collaboratively?",
-        options: ["Independent", "Collaboratively"]
+        question: "Are you interested in pursuing further education or vocational training?",
+        options: ["Yes", "No","Maybe"],
+        indexes: [[10,11],[10,11],[10,11]],
+        effect:[[15,15],[0,0],[8.8,8.8]]
+    },
+    {
+        question: "What is your highest level of education?",
+        options: ["No High School Diploma", "High School Diploma or GED","Some college","Associate's Degree","Bachelor's Degree"],
+        indexes: [[11,10],[11,10],[11,10],[11,10],[11,10]],
+        effect:[[0,0],[30,7],[45,10],[67,12],[80,35]]
+    },
+    {
+        question: "Are you willing to work shifts or irregular hours?",
+        options: ["Yes","No"],
+        indexes: [[8],[8]],
+        effect:[[0],[30]]
+    },
+    {
+        question: "Are you able to perform physically demanding work",
+        options: ["Yes", "No", "Limited ability"],
+        indexes: [[13,5],[13,5],[13,5]],
+        effect:[[0,0],[-70,-50],[-40,-40]]
+    },
+    {
+        question: "Do you have reliable transportation to get to work?",
+        options: ["Yes", "No", "Only public transportation"],
+        indexes: [[8],[8],[8]],
+        effect: [[0],[60],[20]]
+    },
+    {
+        question: "Do you prefer working indepndently or as part of a team?",
+        options: ["Independently","As part of a team", "Either"],
+        indexes:[[12,7,6],[12,14,2],[4]],
+        effect:[[70,20,20],[0,25,25],[40]]
+    },
+    {
+        question: "Do you have any preferences for the size of the company you work for?",
+        options: ["Small business", "Medium-sized company","Large corporation","No preference"],
+        indexes:[[15],[15],[15],[15]],
+        effect:[[0],[50],[100],[50]]
+    },
+    {
+        question: "What challenges have you faced in finding employment? (Select all that apply)",
+        options: ["Lack of experience", "Criminal Record", "Lack of skills or training", "Transportation issues", "Health problems"],
+        indexes:[[10],[0],[10],[6],[13]],
+        effect:[[-20],[50],[-20],[20],[-100]]
     }
 ];
 
-//
-const quizAnswers = [];
-//
 function startQuiz() {
     quizSubmitContainer.innerHTML = `
     <div class="quiz-container"> 
     <h2 class="quiz-number">Q${quizNumber}.</h2>
     <h3 class="question">${quizQuestions[quizNumber-1].question}</h3>
     <div class="answers-container">
-        ${outputAnswers()}
+        ${displayAnswers()}
     </div>
     </div>
     <div class="question-buttons">
-    ${createBackButton()}
     ${createNextButton()}
     </div>
     `
@@ -97,38 +237,55 @@ function startQuiz() {
 function setupQuizFunctions() {
     const nextButton = document.getElementById('next');
     nextButton.addEventListener("click", goNext);
-
-    if (quizNumber >= 2) {
-        const backButton = document.getElementById('back');
-        backButton.addEventListener("click", goBack);
-    }
 }
 function goNext() {
     if (document.querySelector('input[name="answers"]:checked') !== null) {
-    storeRadioData();
-    quizNumber++;
-    if (quizNumber > quizQuestions.length) {
-        console.log(quizAnswers);
-        createlocationMenu();
-    } else startQuiz();
+        useSelectedAnswer();
+        quizNumber++;
+        if (quizNumber > quizQuestions.length) {
+            createlocationMenu();
+        } else startQuiz();
     } else alert('missing an answer')
 }
-function storeRadioData() {
-    console.log(document.querySelector('input[name="answers"]:checked').value);
-    quizAnswers.push(document.querySelector('input[name="answers"]:checked').value);
+// uses the selected value and edits the points correlated to its type
+// ex: can you do manual labor? answer="yes" which is index 0 of the answers attribute
+// you take index 0 of the questions type attribute, which links to the correct index of
+// the typesPoints array, which contains all the points. which is also correlated to the
+// types[] sorry veyr confusing know cleaner way but already used too muc time
+function useSelectedAnswer() {
+    const answer = document.querySelector('input[name="answers"]:checked').value
+    console.log(answer);
+    let optionIndex = -1;
+    for(let i = 0; i < quizQuestions[quizNumber-1].options.length; i++) {
+        console.log(quizQuestions[quizNumber-1].options[i])
+        if (quizQuestions[quizNumber-1].options[i] == answer) {
+            optionIndex = i;
+        }
+    }
+    console.log(optionIndex);
+    editScore(optionIndex);
 }
-function deleteLatestQuizAnswer() {
-    console.log(quizAnswers.pop());
+function editScore(optionIndex) {
+    /*option: "Customer service",
+     indexes: [1,4],                      indexes[optionIndex] theoretically equals this (array in array in object skull emoji)
+     effect: [100, 40]
+    scores[1].name = customer service
+     scores[1].points = 0
+     scores[1].points + effect[1] = 100
+     */
+    const correlatingIndexes = quizQuestions[quizNumber-1].indexes[optionIndex];
+    for(let i = 0; i < correlatingIndexes.length; i++) {
+        const correctIndex = correlatingIndexes[i];
+        console.log(`${scores[correctIndex].name}: ${scores[correctIndex].points}`);
+        const add = quizQuestions[quizNumber-1].effect[optionIndex][i];
+        scores[correctIndex].points += add;
+        console.log(`${scores[correctIndex].name}: ${scores[correctIndex].points}`);
+    }
 }
 function goBack() {
     deleteLatestQuizAnswer();
     quizNumber--;
     startQuiz();
-}
-function createBackButton() {
-    if (quizNumber >=  2) {
-        return `<button id="back" class="quiz-button" type ="button">Back</button>`;
-    } else return "";
 }
 function createNextButton() {
     return `<button id="next" class="quiz-button" type="button">Next</button>`;
@@ -138,13 +295,30 @@ function createSubmitButton() {
         return `<button id="submit" class="quiz-button" type="button">Submit</button>`;
     } else return "";
 }
-function outputAnswers() {
+function displayAnswers() {
     let answerList ="";
     for(let i = 0; i < quizQuestions[quizNumber-1].options.length; i++) {
         const answer = quizQuestions[quizNumber-1].options[i];
         answerList += `<label class="answer-label" for="${answer}"><input class="answer" name="answers" type="radio" value="${answer}" required/>${answer}</label>`
     }
     return answerList;
+}
+function convertScoresToJSON() {
+    return JSON.parse(`{ "scores" :
+{
+${loopThroughScores()}
+}
+}`);
+}
+function loopThroughScores() {
+    let str = "";
+    str += `"${scores[0].name}" : ${scores[0].points},`
+    for(i = 1; i < scores.length-1; i++) {
+        str += `\n"${scores[i].name}" : ${scores[i].points},`
+    }
+    str += `\n"${scores[scores.length-1].name}" : ${scores[scores.length-1].points}`
+    console.log(str);
+    return(str);
 }
 function createlocationMenu() {
     quizSubmitContainer.innerHTML = "";
@@ -233,14 +407,66 @@ function setupLocationFunctions() {
         document.getElementById('distance-value').textContent = distance.value ;
     });
 }
+/* function pullEntriesPage() {
+    const backgroundContainer = document.getElementById('transparent-background');
+    setupEntryFunctions();
+    backgroundContainer.innerHTML = 
+    `
+    <div id="entries-background">
+        <div id="entries-container">
+        </div>
+    </div>
+    `
+}
+function createEntries() {
+    let entry = {
+        brand: "",
+        address: "",
+        amenity: "",
+        hours: "",
+        phone: "",
+        website: ""
+    };
+    setEntryAddress(entry)
+}
+function pullLocationsData() {
+    return fetch('/message.json') 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            throw error;
+        });
+}
+function setupEntryFunctions() {
+    let allEntries = [];
+    const jobLocations = pullLocationsData();
+    setEntryAddress(jobLocations);
+} */
 function findCoords() {
     // if any of the elements are empty, then it shouldn't look for the coords
     if (!document.getElementById('city').value || !document.getElementById('address').value || !document.getElementById('zipcode').value ) {
         alert("Please fill out all information.")
     } else {
+    /*
     // THESE ARE COORDS OF WHATEVER ADDRESS THEY TYPE. WHAT IS THE NEXT STEP ?!?!?!?
     addressToCoords(getFullAddress());
-    }
+    // radius around the person that you want to find
+    distance.value;
+    // converts all the values to a json that will be put into a filter
+    convertScoresToJSON();
+    
+    ALL THREE NEEDED VALUES ON THE FRONT-END ARE IN PLAY FOR GREAT THINGS.
+    */
+}
 }
 function getFullAddress() {
     const stateVal = document.getElementById('state').value || '';
@@ -273,7 +499,13 @@ async function addressToCoords(address) {
         return null;
     }
 }   
-(async () => {
+
+
+
+
+
+
+/* (async () => {
     const api = await fetch('https://www.overpass-api.de/api/interpreter?', {
       method: 'POST',
       headers: {
@@ -284,4 +516,5 @@ async function addressToCoords(address) {
     });
     const answer = await api.json();
     console.log(answer);
-  })()
+  })()) 
+} */
