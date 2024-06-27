@@ -39,7 +39,7 @@ var nameList = (data) => {
 
 
 
-setParameters(2, 37.362760, -122.023660);
+setParameters(400, 0, 0);
 console.log(apicmd);
 
 
