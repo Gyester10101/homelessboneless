@@ -1,5 +1,5 @@
 {
-  "Industry": {
+  "industry": {
     "Automotive": {
       "Repair and Maintenance": [
         "AAMCO",
@@ -151,8 +151,8 @@
       ]
     }
   },
-  "Leniency": {
-    "More Lenient": [
+  "leniency": {
+    "high": [
       "Goodwill",
       "Salvation Army",
       "McDonald's",
@@ -189,7 +189,7 @@
       "Chick-fil-A",
       "Seasons 52"
     ],
-    "Moderately Lenient": [
+    "med": [
       "Jiffy Lube",
       "Firestone",
       "U-Haul",
@@ -220,7 +220,7 @@
       "LSG Sky Chefs",
       "AAMCO"
     ],
-    "Less Lenient": [
+    "low": [
       "Walgreens",
       "Nordstrom",
       "Sears",
@@ -241,8 +241,8 @@
       "AT&T"
     ]
   },
-  "Work Schedule": {
-    "Flexible Part-Time Work Schedule": [
+  "schedule": {
+    "flex": [
       "Baskin-Robbins",
       "Buffalo Wild Wings",
       "Carl's Jr.",
@@ -309,7 +309,7 @@
       "Genentech",
       "Tyson Foods"
     ],
-    "Full-time Work Schedule": [
+    "set": [
       "Caterpillar",
       "DuPont",
       "Tesla",
@@ -370,8 +370,8 @@
       "Yard House"
     ]
   },
-  "Working Environment": {
-    "Outdoor Working Environment": [
+  "environment": {
+    "out": [
       "AAMCO",
       "Bridgestone",
       "Firestone",
@@ -387,7 +387,7 @@
       "Tesla",
       "AT&T"
     ],
-    "Indoor Working Environment": [
+    "in": [
       "Ace Hardware",
       "American Greetings",
       "Apple",
@@ -474,8 +474,8 @@
       "AT&T"
     ]
   },
-  "Compatability With Skills": {
-    "Customer Service": [
+  "skills": {
+    "cust": [
       "Ace Hardware",
       "American Greetings",
       "Apple",
@@ -532,7 +532,7 @@
       "Best Western",
       "Great Clips"
     ],
-    "Manual Labor": [
+    "manu": [
       "AAMCO",
       "Bridgestone",
       "Caterpillar",
@@ -556,7 +556,7 @@
       "WinCo Foods",
       "Salvation Army"
     ],
-    "Administrative Tasks": [
+    "admn": [
       "American Greetings",
       "Apple",
       "AT&T",
@@ -584,7 +584,7 @@
       "Salvation Army",
       "Best Western"
     ],
-    "Technical SKills (IT, Machinery, etc.)": [
+    "tech": [
       "Apple",
       "AT&T",
       "Caterpillar",
@@ -599,7 +599,7 @@
       "Genentech",
       "Salvation Army"
     ],
-    "Cooking and Food Service": [
+    "food": [
       "Baskin-Robbins",
       "Braum's",
       "Buffalo Wild Wings",
@@ -629,7 +629,7 @@
       "Yard House",
       "Best Western"
     ],
-    "Sales": [
+    "sale": [
       "Ace Hardware",
       "American Greetings",
       "Apple",
@@ -659,8 +659,8 @@
       "Salvation Army"
     ]
   },
-  "Expertise Requirement": {
-    "High Expertise Required (Vocational Training, Certifications, or Advanced Skills)": [
+  "expertise": {
+    "high": [
       "AAMCO",
       "Bridgestone",
       "Caterpillar",
@@ -680,7 +680,7 @@
       "LSG Sky Chefs",
       "Embassy Suites"
     ],
-    "Moderate Expertise Required (Some Training or Certifications)": [
+    "med": [
       "Apple",
       "AT&T",
       "Dollar Car Rental",
@@ -710,7 +710,7 @@
       "Embassy Suites",
       "U-Haul"
     ],
-    "Basic Expertise Required (Entry-Level with On-the-Job Training)": [
+    "low": [
       "Ace Hardware",
       "American Greetings",
       "Avon",
@@ -754,8 +754,8 @@
       "U-Haul"
     ]
   },
-  "Education Level Requirement": {
-    "No High School Diploma Required": [
+  "education": {
+    "none": [
       "Baskin-Robbins",
       "Braum's",
       "Carl's Jr.",
@@ -782,7 +782,7 @@
       "Ruby Tuesday",
       "Yard House"
     ],
-    "High School Diploma or GED Required": [
+    "high": [
       "Ace Hardware",
       "American Greetings",
       "Avon",
@@ -825,7 +825,7 @@
       "Seasons 52",
       "Nordstrom"
     ],
-    "Associate's Degree Required": [
+    "ax": [
       "AAMCO",
       "Bridgestone",
       "Dunkin' Donuts",
@@ -835,7 +835,7 @@
       "Rumpke",
       "Great Clips"
     ],
-    "Bachelor's Degree or Higher Required": [
+    "bx": [
       "Apple",
       "AT&T",
       "Caterpillar",
@@ -848,8 +848,8 @@
       "Tesla"
     ]
   },
-  "Manual Labor Level": {
-    "High Level of Manual Labor": [
+  "labor": {
+    "lots": [
       "AAMCO",
       "Bridgestone",
       "Caterpillar",
@@ -938,7 +938,7 @@
       "Red Robin",
       "Wyndham Hotels"
     ],
-    "Moderate Level of Manual Labor": [
+    "little": [
       "Ace Hardware",
       "Best Western",
       "Chili's",
@@ -961,7 +961,7 @@
       "Red Robin",
       "Wyndham Hotels"
     ],
-    "Low Level of Manual Labor": [
+    "low": [
       "American Greetings",
       "Apple",
       "AT&T",
@@ -1012,8 +1012,8 @@
       "Dairy Queen"
     ]
   },
-  "Working  Style": {
-    "Independent Working Style": [
+  "style": {
+    "self": [
       "Avon",
       "Bed Bath & Beyond",
       "Braum's",
@@ -1037,7 +1037,7 @@
       "Shell Oil",
       "Pilot Flying J (Certain Roles)"
     ],
-    "Team Working Style": [
+    "team": [
       "AAMCO",
       "Ace Hardware",
       "American Greetings",
@@ -1102,8 +1102,8 @@
       "Pilot Flying J"
     ]
   },
-  "Accommodation Level": {
-    "Most Accommodating": [
+  "acc": {
+    "high": [
       "Goodwill",
       "Salvation Army",
       "AAMCO",
@@ -1144,7 +1144,7 @@
       "Braum's",
       "Baskin-Robbins"
     ],
-    "Moderately Accommodating": [
+    "med": [
       "Albertsons",
       "Safeway",
       "Bridgestone",
@@ -1175,7 +1175,7 @@
       "Pilot Flying J",
       "ShopRite"
     ],
-    "Less Accommodating": [
+    "low": [
       "Tesla",
       "Apple",
       "Nordstrom",
