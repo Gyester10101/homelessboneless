@@ -1,3 +1,4 @@
+
 const navButton2 = document.getElementById('nav2-button');
 const navBar2 = document.getElementById('nav-bar2');
 const navBar2String = navBar2.innerHTML;
@@ -51,12 +52,117 @@ navButton2.addEventListener("click", toggleNav);
 window.addEventListener('resize', checkWindowSize);
 
 checkWindowSize();
+//
 
-// jobs.html functions
+
+// jobs.html scripts
+
+
+//
+
+//quiz scripts
+
+
+//
+const backgroundContainer = document.getElementById('transparent-background');
 const quizSubmitContainer = document.querySelector('.quiz-submit-container')
 let quizNumber = 1;
-const startQuizButton = document.getElementById('take-quiz')
+const startQuizButton = document.getElementById('take-quiz');
 startQuizButton.addEventListener("click", startQuiz);
+const quizQuestions = [
+    {
+        question: "Do you have any current restrictions due to parole or probation?",
+        options: ["Yes","No"],
+        // numbers for easy access to types index
+        indexes: [[0], [0]],
+        effect: [[500], [0]]
+    },
+    {
+        question: "Do you have any pending charges or legal matters?",
+        options: ["Yes", "No"],
+        indexes: [[0],[0]],
+        effect: [[500],[0]]
+    },
+    {
+        question: "Out of these services, which are you most interested in?",
+        options: ["Customer service", "Construction and trades", "Healthcare", "Retail","Manufacturing","Transportation and delivery","Technology"],
+        indexes: [[1,4], [2], [3], [4,1], [5,13], [6], [7,12]],
+        effect: [[100,40],[100],[100],[100,40],[100,40],[100],[100,30]]
+    },
+    {
+        question: "Are you interested in part-time or full-time work?",
+        options: ["Part-time","Full-time","Either"],
+        indexes: [[8], [8], [8]],
+        effect: [[100],[0],[50]]
+    },
+    {
+        question: "Do you prefer to work indoors or outdoors?",
+        options: ["Indoors", "Outdoors", "No Preference"],
+        indexes: [[9], [9], [9]],
+        effect:[[100],[0],[50]]
+    },
+    {
+        question: "What are your primary skills or areas of expertise?",
+        options: ["Customer service","Manual labor","Administrative tasks","Technical skills (e.g., IT, machinery)",
+            "Cooking and food service", "Sales"],
+        indexes:[[1,4],[13,5],[7,1],[7,5],[14],[1,4,2]],
+        effect:[[50,20],[50,20],[25,40],[50,10],[50],[40,25,30]]
+    },
+    {
+        question: "Do you have any vocational training or certifications",
+        options: ["Yes","No"],
+        indexes: [[10],[10]],
+        effect:[[70],[0]]
+    },
+    {
+        question: "Are you interested in pursuing further education or vocational training?",
+        options: ["Yes", "No","Maybe"],
+        indexes: [[10,11],[10,11],[10,11]],
+        effect:[[15,15],[0,0],[8.8,8.8]]
+    },
+    {
+        question: "What is your highest level of education?",
+        options: ["No High School Diploma", "High School Diploma or GED","Some college","Associate's Degree","Bachelor's Degree"],
+        indexes: [[11,10],[11,10],[11,10],[11,10],[11,10]],
+        effect:[[0,0],[30,7],[45,10],[67,12],[80,35]]
+    },
+    {
+        question: "Are you willing to work shifts or irregular hours?",
+        options: ["Yes","No"],
+        indexes: [[8],[8]],
+        effect:[[0],[30]]
+    },
+    {
+        question: "Are you able to perform physically demanding work",
+        options: ["Yes", "No", "Limited ability"],
+        indexes: [[13,5],[13,5],[13,5]],
+        effect:[[0,0],[-70,-50],[-40,-40]]
+    },
+    {
+        question: "Do you have reliable transportation to get to work?",
+        options: ["Yes", "No", "Only public transportation"],
+        indexes: [[8],[8],[8]],
+        effect: [[0],[60],[20]]
+    },
+    {
+        question: "Do you prefer working indepndently or as part of a team?",
+        options: ["Independently","As part of a team", "Either"],
+        indexes:[[12,7,6],[12,14,2],[4]],
+        effect:[[70,20,20],[0,25,25],[40]]
+    },
+    {
+        question: "Do you have any preferences for the size of the company you work for?",
+        options: ["Small business", "Medium-sized company","Large corporation","No preference"],
+        indexes:[[15],[15],[15],[15]],
+        effect:[[0],[50],[100],[50]]
+    },
+    {
+        question: "What challenges have you faced in finding employment? (Select all that apply)",
+        options: ["Lack of experience", "Criminal Record", "Lack of skills or training", "Transportation issues", "Health problems"],
+        indexes:[[10],[0],[10],[6],[13]],
+        effect:[[-20],[50],[-20],[20],[-100]]
+    }
+];
 const scores = [
     {
         name: "legalSeverity",
@@ -123,101 +229,6 @@ const scores = [
         points: 0
     }
 ]
-const quizQuestions = [
-    {
-        question: "Do you have any current restrictions due to parole or probation?",
-        options: ["Yes","No"],
-        // numbers for easy access to types index
-        indexes: [[0], [0]],
-        effect: [[500], [0]]
-    },
-    {
-        question: "Do you have any pending charges or legal matters?",
-        options: ["Yes", "No"],
-        indexes: [[0],[0]],
-        effect: [[500],[0]]
-    },
-    {
-        question: "Out of these services, which are you most interested in?",
-        options: ["Customer service", "Construction and trades", "Healthcare", "Retail","Manufacturing","Transportation and delivery","Technology"],
-        indexes: [[1,4], [2], [3], [4,1], [5,13], [6], [7,12]],
-        effect: [[100,40],[100],[100],[100,40],[100,40],[100],[100,30]]
-    },
-    {
-        question: "Are you interested in part-time or full-time work?",
-        options: ["Part-time","Full-time","Either"],
-        indexes: [[8], [8], [8]],
-        effect: [[100],[0],[50]]
-    },
-    {
-        question: "Do you prefer to work indoors or outdoors?",
-        options: ["Indoors", "Outdoors", "No Preference"],
-        indexes: [[9], [9], [9]],
-        effect:[[100],[0],[50]]
-    },
-    {
-        question: "What are your primary skills or areas of expertise?",
-        options: ["Customer service","Manual labor","Administrative tasks","Technical skills (e.g., IT, machinery)",
-            "Cooking and food service", "Sales"],
-        indexes:[[1,4],[13,5],[7,1],[7,5],[14],[1,4,2]],
-        effect:[[50,20],[50,20],[25,40],[50,10],[50],[40,25,30]]
-    },
-    {
-        question: "Do you have any vocational training or certifications",
-        options: ["Yes","No"],
-        indexes: [[10],[10]],
-        effect:[[0],[70]]
-    },
-    {
-        question: "Are you interested in pursuing further education or vocational training?",
-        options: ["Yes", "No","Maybe"],
-        indexes: [[10,11],[10,11],[10,11]],
-        effect:[[15,15],[0,0],[8.8,8.8]]
-    },
-    {
-        question: "What is your highest level of education?",
-        options: ["No High School Diploma", "High School Diploma or GED","Some college","Associate's Degree","Bachelor's Degree"],
-        indexes: [[11,10],[11,10],[11,10],[11,10],[11,10]],
-        effect:[[0,0],[30,7],[45,10],[67,12],[80,35]]
-    },
-    {
-        question: "Are you willing to work shifts or irregular hours?",
-        options: ["Yes","No"],
-        indexes: [[8],[8]],
-        effect:[[0],[30]]
-    },
-    {
-        question: "Are you able to perform physically demanding work",
-        options: ["Yes", "No", "Limited ability"],
-        indexes: [[13,5],[13,5],[13,5]],
-        effect:[[0,0],[-70,-50],[-40,-40]]
-    },
-    {
-        question: "Do you have reliable transportation to get to work?",
-        options: ["Yes", "No", "Only public transportation"],
-        indexes: [[8],[8],[8]],
-        effect: [[0],[60],[20]]
-    },
-    {
-        question: "Do you prefer working indepndently or as part of a team?",
-        options: ["Independently","As part of a team", "Either"],
-        indexes:[[12,7,6],[12,14,2],[4]],
-        effect:[[70,20,20],[0,25,25],[40]]
-    },
-    {
-        question: "Do you have any preferences for the size of the company you work for?",
-        options: ["Small business", "Medium-sized company","Large corporation","No preference"],
-        indexes:[[15],[15],[15],[15]],
-        effect:[[0],[50],[100],[50]]
-    },
-    {
-        question: "What challenges have you faced in finding employment? (Select all that apply)",
-        options: ["Lack of experience", "Criminal Record", "Lack of skills or training", "Transportation issues", "Health problems"],
-        indexes:[[10],[0],[10],[6],[13]],
-        effect:[[-20],[50],[-20],[20],[-100]]
-    }
-];
-
 function startQuiz() {
     quizSubmitContainer.innerHTML = `
     <div class="quiz-container"> 
@@ -242,6 +253,8 @@ function goNext() {
         useSelectedAnswer();
         quizNumber++;
         if (quizNumber > quizQuestions.length) {
+            console.log('quiz finished');
+            console.log(convertScoresToJSON());
             createlocationMenu();
         } else startQuiz();
     } else alert('missing an answer')
@@ -303,7 +316,7 @@ function displayAnswers() {
     return answerList;
 }
 function convertScoresToJSON() {
-    return JSON.parse(`{ "scores" :
+    return (`{ "scores" :
 {
 ${loopThroughScores()}
 }
@@ -319,6 +332,10 @@ function loopThroughScores() {
     console.log(str);
     return(str);
 }
+//
+//ask for location scripts
+
+//
 function createlocationMenu() {
     quizSubmitContainer.innerHTML = "";
     quizSubmitContainer.innerHTML += `
@@ -401,71 +418,41 @@ function createlocationMenu() {
 function setupLocationFunctions() {
     const locationButton = document.getElementById('location-button');
     const distance = document.getElementById('distance');
-    locationButton.addEventListener('click', findCoords);
+    locationButton.addEventListener('click', clickedLocationButton);
     distance.addEventListener("input", () => {
         document.getElementById('distance-value').textContent = distance.value ;
     });
 }
-/* function pullEntriesPage() {
-    const backgroundContainer = document.getElementById('transparent-background');
-    setupEntryFunctions();
-    backgroundContainer.innerHTML = 
-    `
-    <div id="entries-background">
-        <div id="entries-container">
-        </div>
-    </div>
-    `
-}
-function createEntries() {
-    let entry = {
-        brand: "",
-        address: "",
-        amenity: "",
-        hours: "",
-        phone: "",
-        website: ""
-    };
-    setEntryAddress(entry)
-}
-function pullLocationsData() {
-    return fetch('/message.json') 
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-            return data;
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-            throw error;
-        });
-}
-function setupEntryFunctions() {
-    let allEntries = [];
-    const jobLocations = pullLocationsData();
-    setEntryAddress(jobLocations);
-} */
-function findCoords() {
+function clickedLocationButton() { 
+    const distance = document.getElementById('distance');
     // if any of the elements are empty, then it shouldn't look for the coords
     if (!document.getElementById('city').value || !document.getElementById('address').value || !document.getElementById('zipcode').value ) {
         alert("Please fill out all information.")
     } else {
-    /*
-    // THESE ARE COORDS OF WHATEVER ADDRESS THEY TYPE. WHAT IS THE NEXT STEP ?!?!?!?
-    addressToCoords(getFullAddress());
-    // radius around the person that you want to find
-    distance.value;
-    // converts all the values to a json that will be put into a filter
-    convertScoresToJSON();
-    
-    ALL THREE NEEDED VALUES ON THE FRONT-END ARE IN PLAY FOR GREAT THINGS.
-    */
+        pullCoords(distance.value);
+    }
 }
+function loadingScreen() {
+    backgroundContainer.innerHTML = `
+    <div id="jobs-background">
+        <p id="loading">please wait. is loading.</p>
+    </div>`
+    console.log("we in the loading screen boys")
+}
+async function pullCoords(distance) {
+    const address = getFullAddress();
+    await addressToCoords(address)
+    .then(response => response.json())
+    .then(data => {
+        if (data) {
+            console.log(`long: ${data.lat}`);
+            console.log(`lat ${data.lng}`);
+            loadingScreen();
+            pullEntriesPage(distance, data.lat, data.lng);
+        } else {
+            console.log('No coords were found for the address', address);
+        }
+    })
 }
 function getFullAddress() {
     const stateVal = document.getElementById('state').value || '';
@@ -475,29 +462,228 @@ function getFullAddress() {
     return `${addrVal}, ${cityVal}, ${stateVal}, ${zipVal}`
 }
 async function addressToCoords(address) {
-    const apiKey = '6ee983379d584d39b26638affc74f3b3';
-    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${apiKey}`;
-
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-
-        // extract latitude and longitude
-        if (data.results.length > 0) {
-            const { lat, lng } = data.results[0].geometry;
-            console.log(`${lat}, ${lng}`)
-            return { lat, lng }; 
-        } else {
-            throw new Error('No results found');
-        }
-    } catch (error) {
-        console.error('Error geocoding:', error);
-        return null;
+    const longLat = await fetch(`/addressToCoords?address=${address}`)
+    return longLat;
+    }
+    catch(error) {
+        console.error('turning address to coords did not go right' + error);
     }
 }   
+async function coordsToAddress(coords) {
+    try {
+        const response = await fetch(`/coordsToAddress?coords=${coords}`)
+        const data = await response.json();
+        const locationInfo = data.results[0].formatted;
+        return locationInfo;
+    }
+    catch (error) {
+        console.error('Error fetching address:', error);
+    }
+}
+//
+
+
+// job entries script
+
+
+//
+let allEntries = [];
+let entriesHTML = "";
+let jobLocations;
+let allElements;
+let entryContainer;
+let selectedInfo;
+async function pullEntriesPage(distance, lat, lng) {
+    await fetch(`/giveLocations?distance=${distance}&lat=${lat}&lng=${lng}&userScore=${btoa(convertScoresToJSON())}`)
+        .then(response => response.json())
+        .then(data => replaceLocationPage(data))
+        .catch(error => {
+            console.error('Error fetching locations', error);
+        });
+}
+
+
+async function replaceLocationPage(data) {
+    const strongMatches = data.strong;
+    const weakMatches = data.weak;
+    await fillAllEntries(strongMatches, weakMatches);
+    updateEntriesHTML();
+    // the backgorund
+    const entriesBackground = document.getElementById('jobs-background');
+    entriesBackground.innerHTML = `
+    <div id="jobs-header">
+    <h2 id="jobs-text">Job Entries</h2>
+    </div>
+    <div id="jobs-container"> 
+    <div id="selected-entry">
+        <div id="logo-container">
+        </div>
+        <div id="selected-info">
+        </div>
+    </div>
+    <div id="entries-container">
+    ${entriesHTML} 
+    </div>
+    </div>
+    `;
+    logoContainer = document.getElementById('logo-container');
+    selectedInfo = document.getElementById('selected-info');
+    entryContainer = document.getElementById('entries-container');
+    createSelectedFunction();
+}
+function createSelectedFunction() {
+    entryContainer.addEventListener('click', function(event) {
+    const entryElement = event.target.closest('.entry');
+    if (entryElement) {
+        const entries = Array.from(entryContainer.getElementsByClassName('entry'));
+        const index = entries.indexOf(entryElement);
+        selectedInfo.innerHTML = `${takeEntryInfo(index)}`
+    }
+    })
+}
+function takeEntryInfo(index) {
+    const entryInList = allEntries[index];
+    logoContainer.innerHTML = `
+        <img src="${getLogoURL(allEntries[index].company)}" alt="company logo"/>
+    `;
+    return `
+    <div id="selected-text-container">
+    ${checkIfExistsThenText(entryInList, 'company')}
+    ${checkIfExistsThenText(entryInList, 'amenity')}
+    ${checkIfExistsThenText(entryInList, 'cuisine')}
+    ${checkIfExistsThenText(entryInList, 'hour')}
+    ${checkIfExistsThenText(entryInList, 'address')}
+    ${checkIfExistsThenText(entryInList, 'phone')}
+    ${checkIfExistsThenText(entryInList, 'website')}
+    </div>
+    `
+}
+async function getLogoURL(brandName) {
+    console.log("so we got the" + brandName);
+    await fetch(`/getLogo?brandName=${brandName}`)
+    .then (response => response.json())
+    .then(data => {
+        const logoUrl = data.logoUrl;
+        return logoUrl
+    })
+    .catch(error => {
+        console.error("did not take logoURL properly", error);
+    })
+}
+function checkIfExistsThenText(entryInList, _tagName) {
+    if (entryInList[_tagName]) {
+        if (_tagName === 'website') {
+            return `<p class="selected-text"><span class="bold">${_tagName[0].toUpperCase() + _tagName.slice(1)}</span>: <a href="${entryInList[_tagName]}">${entryInList[_tagName]}</a></p>`
+        } else return `<p class="selected-text"><span class="bold">${_tagName[0].toUpperCase() + _tagName.slice(1)}</span>: ${entryInList[_tagName]}</p>`;
+    } else return "";
+}
+function updateEntriesHTML() {
+    for(let i = 0; i < allEntries.length; i++) {
+        entriesHTML += `<div class="entry"> ${displayEntryData(i)}</div>`
+    }
+}
+function displayEntryData(indexOfEntry) {
+    return `
+    ${displayRightEntries(indexOfEntry)}
+    ${displayLeftEntries(indexOfEntry)}
+    `
+}
+function displayRightEntries(indexOfEntry) {
+    let rightEntries = `<div class="entry-right">`;
+    rightEntries += `<p class="entry-right-text" id="entry-address"><span class="bold">Address</span>: ${allEntries[indexOfEntry].address}</p>`;
+    if (allEntries[indexOfEntry].phone) {
+        rightEntries += `<p class="entry-right-text" id="entry-phone"><span class="bold">Phone</span>: ${allEntries[indexOfEntry].phone}</p>`;
+    }
+    return rightEntries += "</div>";
+}
+function displayLeftEntries(indexOfEntry) {
+    let leftEntries = `<div class="entry-left">`;
+    if (allEntries[indexOfEntry].company) {
+        leftEntries += `<p class="entry-left-text" id="entry-company"><span class="bold big-entry-text">Company</span>: ${allEntries[indexOfEntry].company}</p>`;
+    }
+    if (allEntries[indexOfEntry].amenity) {
+        leftEntries += `<p class="entry-right-text" id="entry-amenity"><span class="bold">Amenity</span>: ${allEntries[indexOfEntry].amenity}</p>`;
+    }
+    if (allEntries[indexOfEntry].hours) {
+        leftEntries += `<p class="entry-right-text" id="entry-hours"><span class="bold">Hours</span>: ${allEntries[indexOfEntry].hours}</p>`;
+    }
+    return leftEntries += "</div>";
+}
+
+async function fillAllEntries(strongMatches, weakMatches) {
+    for(let i = 0; i < strongMatches.elements.length; i++) {
+    console.log(i);
+    let entry = {
+        company: "",
+        address: "",
+        amenity: "",
+        hours: "",
+        phone: "",
+        website: "",
+        cuisine: ""
+    };
+    // set properties of the entry with that of i-indexes properties
+    await setEntryProperties(strongMatches.elements[i], entry, i);
+    allEntries.push(entry);
+    } 
+    for(let i = 0; i < weakMatches.elements.length; i++) {
+        let entry = {
+            company: "",
+            address: "",
+            amenity: "",
+            hours: "",
+            phone: "",
+            website: "",
+            cuisine: ""
+        };
+        await setEntryProperties(weakMatches.elements[i], entry, i);
+        allEntries.push(entry);
+    }
+}
+async function setEntryProperties(element, entry, counter) {
+    console.log("this is the counter" + counter);
+    entry.company = element.tags['brand'];
+    entry.amenity = element.tags['amenity'];
+    entry.hours = element.tags['opening_hours'];
+    entry.phone = element.tags['phone'];
+    entry.cuisine = element.tags['cuisine'];
+    entry.website = element.tags['website'];
+    await setEntryAddress(element, entry, counter);
+}
+async function setEntryAddress(element, entry, counter) {
+    const city = returnIfExists(element, 'addr:city', counter);
+    const housenumber = returnIfExists(element, 'addr:housenumber', counter);
+    const postcode = returnIfExists(element, 'addr:postcode', counter);
+    const state = returnIfExists(element, 'addr:state', counter);
+    const street = returnIfExists(element, 'addr:street', counter);
+    if (!street) {
+        const addressVal = await stringFromCoords(element, counter);
+        entry.address = addressVal;
+    } else {
+    const addressString = `${housenumber} ${street}, ${city}, ${state}, ${postcode}`
+    entry.address = addressString;
+    }
+}
+async function stringFromCoords(element, counter) {
+    let lat = element.lat;
+    let lon = element.lon;
+    if (!lat) {
+        lat = element.geometry[0].lat;
+        lon = element.geometry[0].lon;
+    }
+    const coords = `${lat} ${lon}`;
+    const address = await coordsToAddress(coords)
+    return address.substring(0, address.length-26);
+}
+
+function returnIfExists(element, tagName, counter) {
+    const val = element.tags[tagName];
+    if (val) {
+        return val
+    } else return "";
+}
+
 
 
 
